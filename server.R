@@ -2,7 +2,7 @@ library(shiny)
 library(rtercen)
 library(plyr)
 
-# shiny::runApp(launch.browser=FALSE, port=5400)
+# shiny::runApp(launch.browser=FALSE, port=6400)
 
 shinyServer(function(input, output, session) {
     
