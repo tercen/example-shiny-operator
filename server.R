@@ -19,7 +19,7 @@ shinyServer(function(input, output, session) {
     
     # create a Tercen client object using the token
     client = rtercen::TercenClient$new(authToken=token)
-    client = rtercen::TercenClient$new(authToken=token, serviceUri="http://127.0.0.1:4400/service")
+    # client = rtercen::TercenClient$new(authToken=token, serviceUri="http://127.0.0.1:4400/service")
     
     # get the cube query defined by the workflow
     query = client$getCubeQuery(workflowId, stepId)
