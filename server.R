@@ -17,8 +17,9 @@ shinyServer(function(input, output, session) {
     str(data_wide)
     
     d3heatmap(data_wide)
+    
   })
-  
+
 })
 
 
