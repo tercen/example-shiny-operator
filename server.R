@@ -26,9 +26,9 @@ getCtx = function(session){
   taskId = query[["taskId"]]
 
   # create a Tercen context object using the token
-  # ctx = tercenCtx(taskId = taskId, authToken = token)
+  ctx = tercenCtx(taskId = taskId, authToken = token)
   
-  ctx = tercenCtx(workflowId = "3b732c1081004d8ad810464ee10076d9", stepId =  "0d5c2e44-ad52-4382-b60c-f745382bd47c")
+  # ctx = tercenCtx(workflowId = "3b732c1081004d8ad810464ee10076d9", stepId =  "0d5c2e44-ad52-4382-b60c-f745382bd47c")
   
   return(ctx)
 }
