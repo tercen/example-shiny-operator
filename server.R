@@ -22,8 +22,8 @@ shinyServer(function(input, output, session) {
     data <- dataInput()
     data_wide <- as.matrix(spread(data, .ci, .y)[, -1])
     
-    rownames(data_wide) <- ctx$rselect()[[1]]
-    colnames(data_wide) <-  ctx$cselect()[[1]]    
+    rownames(data_wide) <- getRownames()
+    colnames(data_wide) <- getColnames()    
     pheatmap(data_wide, fontsize_row = input$rowFontSize)
     
   })
@@ -45,4 +45,16 @@ getValues <- function(session){
   ctx <- getCtx(session)
   data <- ctx %>% select(.y , .ri, .ci)
   return(data)
+}
+
+getRownames <- function(session){
+  ctx <- getCtx(session)
+  rown <- ctx$rselect()[[1]]
+  return(rown)
+}
+
+getColnames <- function(session){
+  ctx <- getCtx(session)
+  coln <- ctx$cselect()[[1]]
+  return(coln)
 }
