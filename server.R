@@ -1,6 +1,7 @@
 library(shiny)
 library(tercen)
 library(dplyr)
+library(tidyr)
 
 shinyServer(function(input, output, session) {
   
