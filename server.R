@@ -1,42 +1,46 @@
 library(shiny)
-library(rtercen)
-library(plyr)
+library(tercen)
+library(dplyr)
+library(d3heatmap)
+library(tidyr)
 
-# shiny::runApp(launch.browser=FALSE, port=6400)
 
 shinyServer(function(input, output, session) {
-    
-  output$status = renderText({
-    # retreive url query parameters provided by tercen
-    httpQueryParameters = parseQueryString(session$clientData$url_search)
-    
-    # get the authentication token
-    token = httpQueryParameters[["token"]]
-    # get the workflow id
-    workflowId = httpQueryParameters[["workflowId"]]
-    # get the step id
-    stepId = httpQueryParameters[["stepId"]]
-    
-    # create a Tercen client object using the token
-    client = rtercen::TercenClient$new(authToken=token)
-    # client = rtercen::TercenClient$new(authToken=token, serviceUri="http://127.0.0.1:4400/service")
-    
-    # get the cube query defined by the workflow
-    query = client$getCubeQuery(workflowId, stepId)
-    # execute the query and get the data
-    cube = query$execute()
-    
-    print (cube$sourceTable$as.data.frame())
-    # compute the mean by .ids
-    computed.df = ddply(cube$sourceTable$as.data.frame(), c(".ids"), summarize, mean = mean(.values))
-    
-    print(computed.df)
-    
-    # send the result to Tercen
-    query$setResult(computed.df)
-    # notify the user that it is done
-    renderPrint({ 'done' })()
-  })
- 
-})
   
+  dataInput = reactive({getValues(session)})
+  
+  output$heatmap <- renderPlot({
+    
+    data <- dataInput()
+    data_wide <- spread(data, .ci, .y)[, -1]
+    print(data_wide)
+    str(data_wide)
+    
+    d3heatmap(data_wide)
+  })
+  
+})
+
+
+
+getCtx = function(session){
+  # retreive url query parameters provided by tercen
+  query = parseQueryString(session$clientData$url_search)
+  token = query[["token"]]
+  taskId = query[["taskId"]]
+
+  # create a Tercen context object using the token
+  ctx = tercenCtx(taskId = taskId, authToken = token)
+  
+  # ctx = tercenCtx(workflowId = "3b732c1081004d8ad810464ee10076d9", stepId =  "0d5c2e44-ad52-4382-b60c-f745382bd47c")
+  
+  return(ctx)
+}
+
+# http://localhost:5402/admin/w/3b732c1081004d8ad810464ee10076d9/ds/0d5c2e44-ad52-4382-b60c-f745382bd47c
+
+getValues = function(session){
+  ctx = getCtx(session)
+  data = ctx %>% select(.y , .ci , .ri)
+  return(data)
+}

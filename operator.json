@@ -1,0 +1,7 @@
+{
+  "name": "Shiny Heatmap",
+  "description": "D3 heatmap",
+  "tags": ["heatmap"],
+  "authors": ["tercen"],
+  "urls": ["https://github.com/agouy/shiny_heatmap_operator"]
+}
