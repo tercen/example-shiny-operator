@@ -19,18 +19,19 @@ shinyServer(function(input, output, session) {
   }) 
   
   output$heatmap <- renderPlot({
-    data <- dataInput()
+    values <- dataInput()
+    data <- values$data
     data_wide <- as.matrix(spread(data, .ci, .y)[, -1])
     
-    rownames(data_wide) <- getRownames()
-    colnames(data_wide) <- getColnames()    
+    rownames(data_wide) <- values$rown
+    colnames(data_wide) <- values$coln    
     pheatmap(data_wide, fontsize_row = input$rowFontSize)
     
   })
   
 })
 
-getCtx <- function(session){
+getCtx <- function(session) {
   # retreive url query parameters provided by tercen
   query <- parseQueryString(session$clientData$url_search)
   token <- query[["token"]]
@@ -43,18 +44,11 @@ getCtx <- function(session){
 
 getValues <- function(session){
   ctx <- getCtx(session)
-  data <- ctx %>% select(.y , .ri, .ci)
-  return(data)
-}
+  values <- list()
 
-getRownames <- function(session){
-  ctx <- getCtx(session)
-  rown <- ctx$rselect()[[1]]
-  return(rown)
-}
-
-getColnames <- function(session){
-  ctx <- getCtx(session)
-  coln <- ctx$cselect()[[1]]
-  return(coln)
+  values$data <- ctx %>% select(.y , .ri, .ci)
+  values$rown <- ctx$rselect()[[1]]
+  values$coln <- ctx$cselect()[[1]]
+  
+  return(values)
 }
