@@ -7,7 +7,10 @@ shinyUI(fluidPage(
   sidebarPanel(
     sliderInput("plotWidth", "Plot width (px)", 200, 2000, 500),
     sliderInput("plotHeight", "Plot width (px)", 200, 2000, 1200),
-    sliderInput("rowFontSize", "Row labels font size", 5, 20, 7, step = 1)
+    sliderInput("rowFontSize", "Row labels font size", 5, 20, 7, step = 1),
+    checkboxInput("logScale", "Log scale", value = FALSE),
+    "NB: for negative values, the opposite of the log transformed absolute is computed"
+    
   ),
   
   mainPanel(
