@@ -1,4 +1,4 @@
-# Shiny Heatmap Tercen operator
+# Template Shiny operator for Tercen
 
-A simple heatmap based on the `pheatmap` R package.
+A template to create Shiny operators in Tercen.
 

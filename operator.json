@@ -1,7 +1,7 @@
 {
-  "name": "Shiny Heatmap",
-  "description": "Heatmap",
-  "tags": ["heatmap"],
+  "name": "Template Shiny Operator",
+  "description": "Template to create a Shiny operator in Tercen.",
+  "tags": ["template"],
   "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/shiny_heatmap_operator"]
+  "urls": ["https://github.com/tercen/template_shiny_operator"]
 }
