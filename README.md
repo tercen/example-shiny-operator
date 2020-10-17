@@ -21,11 +21,8 @@ Output relations|.
 
 ##### Details
 
-The operator takes all the values of a cell and returns the value which is the median.The computation is done per cell. There is one value returned for each of the input cell.
-
-#### References
-
+Details on the computation.
 
 ##### See Also
 
-[templateR_operator](https://github.com/tercen/templateR_operator)
+[template_R_operator](https://github.com/tercen/template_R_operator)
