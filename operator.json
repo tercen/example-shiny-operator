@@ -3,5 +3,6 @@
   "description": "Template to create a Shiny operator in Tercen.",
   "tags": ["template"],
   "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/template-shiny-operator"]
+  "urls": ["https://github.com/tercen/template-shiny-operator"],
+  "isViewOnly": true
 }

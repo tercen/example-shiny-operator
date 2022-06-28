@@ -18,7 +18,7 @@ getCtx <- function(session) {
 ####
 ############################################
 
-shinyServer(function(input, output, session) {
+server <- shinyServer(function(input, output, session) {
   
   dataInput <- reactive({
     getValues(session)
@@ -51,3 +51,8 @@ getValues <- function(session){
   return(values)
 }
 
+getMode <- function(session){
+  # retreive url query parameters provided by tercen
+  query = parseQueryString(session$clientData$url_search)
+  return(query[["mode"]])
+}
